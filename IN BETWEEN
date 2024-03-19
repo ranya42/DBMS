@@ -1,0 +1,160 @@
+mysql> select*from EMPLOYEE;
+ERROR 1046 (3D000): No database selected
+mysql> select * from EMPLOYEE;
+ERROR 1046 (3D000): No database selected
+mysql> use EMPLOYEE;
+Database changed
+mysql> select * from EMPLOYEE;
++-------+---------+-------------------+-----------------+-------------+--------+
+| SSN   | Name    | Department        | Project         | Project_loc | salary |
++-------+---------+-------------------+-----------------+-------------+--------+
+| CVB1  | Febin   | Marketing manager | Banking         | Banglore    |   NULL |
+| CVB2  | Shebin  | Finance           | Finance Service | Delhi       |   NULL |
+| CVB3  | Simon   | HR                | Developping     | Haiderabad  |   NULL |
+| CVB4  | Revathy | Marketing         | Manufacture     | Banglore    |   NULL |
+| CVB5  | Jecob   | Finance           | Accounting      | Chennai     |   NULL |
+| CVB6  | Cathrin | Marketing         | Sales           | Kochi       |   NULL |
+| CVB7  | Boby    | Production        | Manufacture     | Chennai     |   NULL |
+| CVB8  | Koke    | Production        | Design          | Delhi       |   NULL |
+| CVB9  | Mark    | HR                | Managing        | Delhi       |   NULL |
+| CVB10 | Ory     | Production        | Quality         | Delhi       |   NULL |
++-------+---------+-------------------+-----------------+-------------+--------+
+10 rows in set (0.02 sec)
+
+mysql> select * from EMPLOYEE where dept ="Finance Service" and Project_loc = "Delhi";
+ERROR 1054 (42S22): Unknown column 'dept' in 'where clause'
+mysql> update set EMPLOYEE salary=12000 where SSN="CVB1";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'set EMPLOYEE salary=12000 where SSN="CVB1"' at line 1
+mysql> update EMPLOYEE set salary=12000 where SSN="CVB1";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update EMPLOYEE set salary=15000.9 where SSN="CVB2";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from EMPLOYEE;
++-------+---------+-------------------+-----------------+-------------+----------+
+| SSN   | Name    | Department        | Project         | Project_loc | salary   |
++-------+---------+-------------------+-----------------+-------------+----------+
+| CVB1  | Febin   | Marketing manager | Banking         | Banglore    | 12000.00 |
+| CVB2  | Shebin  | Finance           | Finance Service | Delhi       | 15000.90 |
+| CVB3  | Simon   | HR                | Developping     | Haiderabad  |     NULL |
+| CVB4  | Revathy | Marketing         | Manufacture     | Banglore    |     NULL |
+| CVB5  | Jecob   | Finance           | Accounting      | Chennai     |     NULL |
+| CVB6  | Cathrin | Marketing         | Sales           | Kochi       |     NULL |
+| CVB7  | Boby    | Production        | Manufacture     | Chennai     |     NULL |
+| CVB8  | Koke    | Production        | Design          | Delhi       |     NULL |
+| CVB9  | Mark    | HR                | Managing        | Delhi       |     NULL |
+| CVB10 | Ory     | Production        | Quality         | Delhi       |     NULL |
++-------+---------+-------------------+-----------------+-------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> update EMPLOYEE set salary=24000 where SSN="CVB3";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update EMPLOYEE set salary=11000 where SSN="CVB5";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update EMPLOYEE set salary=89000 where SSN="CVB6";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update EMPLOYEE set salary=90000 where SSN="CVB7";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update EMPLOYEE set salary=89000 where SSN="CVB8";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update EMPLOYEE set salary=54000 where SSN="CVB9";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update EMPLOYEE set salary=54780.98 where SSN="CVB10";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from EMPLOYEE;
++-------+---------+-------------------+-----------------+-------------+----------+
+| SSN   | Name    | Department        | Project         | Project_loc | salary   |
++-------+---------+-------------------+-----------------+-------------+----------+
+| CVB1  | Febin   | Marketing manager | Banking         | Banglore    | 12000.00 |
+| CVB2  | Shebin  | Finance           | Finance Service | Delhi       | 15000.90 |
+| CVB3  | Simon   | HR                | Developping     | Haiderabad  | 24000.00 |
+| CVB4  | Revathy | Marketing         | Manufacture     | Banglore    |     NULL |
+| CVB5  | Jecob   | Finance           | Accounting      | Chennai     | 11000.00 |
+| CVB6  | Cathrin | Marketing         | Sales           | Kochi       | 89000.00 |
+| CVB7  | Boby    | Production        | Manufacture     | Chennai     | 90000.00 |
+| CVB8  | Koke    | Production        | Design          | Delhi       | 89000.00 |
+| CVB9  | Mark    | HR                | Managing        | Delhi       | 54000.00 |
+| CVB10 | Ory     | Production        | Quality         | Delhi       | 54780.98 |
++-------+---------+-------------------+-----------------+-------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> update EMPLOYEE set salary=77000.88 where SSN="CVB4";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from EMPLOYEE;
++-------+---------+-------------------+-----------------+-------------+----------+
+| SSN   | Name    | Department        | Project         | Project_loc | salary   |
++-------+---------+-------------------+-----------------+-------------+----------+
+| CVB1  | Febin   | Marketing manager | Banking         | Banglore    | 12000.00 |
+| CVB2  | Shebin  | Finance           | Finance Service | Delhi       | 15000.90 |
+| CVB3  | Simon   | HR                | Developping     | Haiderabad  | 24000.00 |
+| CVB4  | Revathy | Marketing         | Manufacture     | Banglore    | 77000.88 |
+| CVB5  | Jecob   | Finance           | Accounting      | Chennai     | 11000.00 |
+| CVB6  | Cathrin | Marketing         | Sales           | Kochi       | 89000.00 |
+| CVB7  | Boby    | Production        | Manufacture     | Chennai     | 90000.00 |
+| CVB8  | Koke    | Production        | Design          | Delhi       | 89000.00 |
+| CVB9  | Mark    | HR                | Managing        | Delhi       | 54000.00 |
+| CVB10 | Ory     | Production        | Quality         | Delhi       | 54780.98 |
++-------+---------+-------------------+-----------------+-------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> select price from EMPLOYEE where salary between 10000 and 30000;
+ERROR 1054 (42S22): Unknown column 'price' in 'field list'
+mysql> select salary from EMPLOYEE where salary between 10000 and 30000;
++----------+
+| salary   |
++----------+
+| 12000.00 |
+| 15000.90 |
+| 24000.00 |
+| 11000.00 |
++----------+
+4 rows in set (0.00 sec)
+
+mysql> select Department from EMPLOYEE where colum name in("HR","Production","Finance Service");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'name in("HR","Production","Finance Service")' at line 1
+mysql> select Name from EMPLOYEE where Department colum name in("HR","Production","Finance Service");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'colum name in("HR","Production","Finance Service")' at line 1
+mysql> select Name from EMPLOYEE where Department in("HR","Production","Finance Service");
++-------+
+| Name  |
++-------+
+| Simon |
+| Boby  |
+| Koke  |
+| Mark  |
+| Ory   |
++-------+
+5 rows in set (0.00 sec)
+
+mysql> select Name from EMPLOYEE where Department not in("HR","Production","Finance Service");
++---------+
+| Name    |
++---------+
+| Febin   |
+| Shebin  |
+| Revathy |
+| Jecob   |
+| Cathrin |
++---------+
+5 rows in set (0.00 sec)
+
+mysql>
