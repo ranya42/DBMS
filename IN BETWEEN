@@ -180,4 +180,40 @@ mysql> select count(Name) from EMPLOYEE group by Department order by Department;
 |           3 |
 +-------------+
 5 rows in set (0.00 sec)
+mysql>
+mysql> alter table EMPLOYEE add primary key(SSN);
+Query OK, 0 rows affected (0.23 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc EMPLOYEE;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| SSN         | varchar(10) | NO   | PRI | NULL    |       |
+| Name        | varchar(30) | YES  |     | NULL    |       |
+| Department  | varchar(25) | YES  |     | NULL    |       |
+| Project     | varchar(20) | YES  |     | NULL    |       |
+| Project_loc | varchar(40) | YES  |     | NULL    |       |
+| salary      | float(10,2) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> alter table EMPLOYEE drop primary key;
+Query OK, 10 rows affected (0.05 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> desc EMPLOYEE;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| SSN         | varchar(10) | NO   |     | NULL    |       |
+| Name        | varchar(30) | YES  |     | NULL    |       |
+| Department  | varchar(25) | YES  |     | NULL    |       |
+| Project     | varchar(20) | YES  |     | NULL    |       |
+| Project_loc | varchar(40) | YES  |     | NULL    |       |
+| salary      | float(10,2) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+
 
