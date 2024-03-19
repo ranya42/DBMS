@@ -157,4 +157,27 @@ mysql> select Name from EMPLOYEE where Department not in("HR","Production","Fina
 +---------+
 5 rows in set (0.00 sec)
 
-mysql>
+mysql>mysql> select count(Name) from EMPLOYEE group by Department;
++-------------+
+| count(Name) |
++-------------+
+|           1 |
+|           2 |
+|           2 |
+|           2 |
+|           3 |
++-------------+
+5 rows in set (0.00 sec)
+
+mysql> select count(Name) from EMPLOYEE group by Department order by Department;
++-------------+
+| count(Name) |
++-------------+
+|           2 |
+|           2 |
+|           2 |
+|           1 |
+|           3 |
++-------------+
+5 rows in set (0.00 sec)
+
