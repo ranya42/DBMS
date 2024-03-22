@@ -100,4 +100,28 @@ mysql> select orders.custid,orders.ordername,product.productname from orders joi
 +--------+-----------+-------------+
 5 rows in set (0.00 sec)
 
+mysql>mysql> select orders.custid,orders.ordername,product.productname from orders left join product on orders.custid=product.ordrid;
++--------+-----------+-------------+
+| custid | ordername | productname |
++--------+-----------+-------------+
+| CP1    | pen       | pen         |
+| CP2    | book      | book        |
+| CP3    | cake      | cake        |
+| CP4    | lipstick  | lipstick    |
+| CP5    | chair     | chair       |
++--------+-----------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select orders.custid,orders.ordername,product.productname from orders right join product on orders.custid=product.ordrid;
++--------+-----------+-------------+
+| custid | ordername | productname |
++--------+-----------+-------------+
+| CP1    | pen       | pen         |
+| CP2    | book      | book        |
+| CP3    | cake      | cake        |
+| CP4    | lipstick  | lipstick    |
+| CP5    | chair     | chair       |
++--------+-----------+-------------+
+5 rows in set (0.00 sec)
+
 mysql>
