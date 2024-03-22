@@ -1,0 +1,103 @@
+mysql> insert into order value("c1","pen","fidha","CP1",2030-12-27);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order value("c1","pen","fidha","CP1",2030-12-27)' at line 1
+mysql> insert into order value("c1","pen","fidha","CP1",2030-12-12);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order value("c1","pen","fidha","CP1",2030-12-12)' at line 1
+mysql> insert into orders values("c1","pen","fidha","CP1",2030-12-12);
+ERROR 1292 (22007): Incorrect date value: '2006' for column 'orderdate' at row 1
+mysql> insert into orders values("c1","pen","fidha","CP1","2030-12-12");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into orders values("c2","book","hadiya","CP2","2030-12-13");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into orders values("c3","cake","wafa","CP3","2030-12-14");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into orders values("c4","lipstick","niba","CP4","2030-12-15");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into orders values("c5","chair","nisha","CP5","2030-12-16");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from orders;
++---------+-----------+----------+--------+------------+
+| orderid | ordername | custname | custid | orderdate  |
++---------+-----------+----------+--------+------------+
+| c1      | pen       | fidha    | CP1    | 2030-12-12 |
+| c2      | book      | hadiya   | CP2    | 2030-12-13 |
+| c3      | cake      | wafa     | CP3    | 2030-12-14 |
+| c4      | lipstick  | niba     | CP4    | 2030-12-15 |
+| c5      | chair     | nisha    | CP5    | 2030-12-16 |
++---------+-----------+----------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> create table product(prodid varchar(15),productname varchar(15),ordrid varchar(15));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table product(prodid varchar(15),productname varchar(15),orderid varchar(15));
+ERROR 1050 (42S01): Table 'product' already exists
+mysql> alter table product rename colum ordrid to orderid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ordrid to orderid' at line 1
+mysql> alter table product rename ordrid to orderid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'to orderid' at line 1
+mysql> alter table product rename ordrid to orderid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'to orderid' at line 1
+mysql> alter table product rename orderid to ordrid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'to ordrid' at line 1
+mysql> ALTER TABLE product RENAME ordrid to orderid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'to orderid' at line 1
+mysql> insert into product values("p1","pen","CP1");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product values("b2","book","CP2");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product values("c3","cake","CP3");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product values("l4","lipstick","CP4");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product values("c4","chair","CP5");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from orders;
++---------+-----------+----------+--------+------------+
+| orderid | ordername | custname | custid | orderdate  |
++---------+-----------+----------+--------+------------+
+| c1      | pen       | fidha    | CP1    | 2030-12-12 |
+| c2      | book      | hadiya   | CP2    | 2030-12-13 |
+| c3      | cake      | wafa     | CP3    | 2030-12-14 |
+| c4      | lipstick  | niba     | CP4    | 2030-12-15 |
+| c5      | chair     | nisha    | CP5    | 2030-12-16 |
++---------+-----------+----------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from product;
++--------+-------------+--------+
+| prodid | productname | ordrid |
++--------+-------------+--------+
+| p1     | pen         | CP1    |
+| b2     | book        | CP2    |
+| c3     | cake        | CP3    |
+| l4     | lipstick    | CP4    |
+| c4     | chair       | CP5    |
++--------+-------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select orders.custid,orders.ordername,product.productname from orders join product on orders.orderid=product.ordrid;
+Empty set (0.00 sec)
+
+mysql> select orders.custid,orders.ordername,product.productname from orders join product on orders.custid=product.ordrid;
++--------+-----------+-------------+
+| custid | ordername | productname |
++--------+-----------+-------------+
+| CP1    | pen       | pen         |
+| CP2    | book      | book        |
+| CP3    | cake      | cake        |
+| CP4    | lipstick  | lipstick    |
+| CP5    | chair     | chair       |
++--------+-----------+-------------+
+5 rows in set (0.00 sec)
+
+mysql>
