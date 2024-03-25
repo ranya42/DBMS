@@ -1,0 +1,215 @@
+mysql> use EMPLOYEE
+Database changed
+mysql> select * from EMPLOYEE;
++-------+---------+-------------------+-----------------+-------------+----------+
+| SSN   | Name    | Department        | Project         | Project_loc | salary   |
++-------+---------+-------------------+-----------------+-------------+----------+
+| CVB1  | Febin   | Marketing manager | Banking         | Banglore    | 12000.00 |
+| CVB10 | Ory     | Production        | Quality         | Delhi       | 54780.98 |
+| CVB2  | Shebin  | Finance           | Finance Service | Delhi       | 15000.90 |
+| CVB3  | Simon   | HR                | Developping     | Haiderabad  | 24000.00 |
+| CVB4  | Revathy | Marketing         | Manufacture     | Banglore    | 77000.88 |
+| CVB5  | Jecob   | Finance           | Accounting      | Chennai     | 11000.00 |
+| CVB6  | Cathrin | Marketing         | Sales           | Kochi       | 89000.00 |
+| CVB7  | Boby    | Production        | Manufacture     | Chennai     | 90000.00 |
+| CVB8  | Koke    | Production        | Design          | Delhi       | 89000.00 |
+| CVB9  | Mark    | HR                | Managing        | Delhi       | 54000.00 |
++-------+---------+-------------------+-----------------+-------------+----------+
+10 rows in set (0.02 sec)
+
+mysql> select * from order;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order' at line 1
+mysql> select * from orders;
++---------+-----------+----------+--------+------------+
+| orderid | ordername | custname | custid | orderdate  |
++---------+-----------+----------+--------+------------+
+| c1      | pen       | fidha    | CP1    | 2030-12-12 |
+| c2      | book      | hadiya   | CP2    | 2030-12-13 |
+| c3      | cake      | wafa     | CP3    | 2030-12-14 |
+| c4      | lipstick  | niba     | CP4    | 2030-12-15 |
+| c5      | chair     | nisha    | CP5    | 2030-12-16 |
++---------+-----------+----------+--------+------------+
+5 rows in set (0.01 sec)
+
+mysql> select * from product;
++--------+-------------+--------+
+| prodid | productname | ordrid |
++--------+-------------+--------+
+| p1     | pen         | CP1    |
+| b2     | book        | CP2    |
+| c3     | cake        | CP3    |
+| l4     | lipstick    | CP4    |
+| c4     | chair       | CP5    |
++--------+-------------+--------+
+5 rows in set (0.01 sec)
+
+mysql> alter table orders add primery key(orderid);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key(orderid)' at line 1
+mysql> alter table orders add primary key(orderid);
+Query OK, 0 rows affected (0.26 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table product add primary key(prodid);
+Query OK, 0 rows affected (0.17 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table product add foreign key(ordrid) references orders(orderid);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`employee`.`#sql-123c_8`, CONSTRAINT `product_ibfk_1` FOREIGN KEY (`ordrid`) REFERENCES `orders` (`orderid`))
+mysql> alter table product add foreign key(ordrid) references orders(orderid);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`employee`.`#sql-123c_8`, CONSTRAINT `product_ibfk_1` FOREIGN KEY (`ordrid`) REFERENCES `orders` (`orderid`))
+mysql> desc orders
+    ->
+    -> -
+    -> desc orders;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-
+desc orders' at line 3
+mysql> desc orders;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| orderid   | varchar(15) | NO   | PRI | NULL    |       |
+| ordername | varchar(15) | YES  |     | NULL    |       |
+| custname  | varchar(15) | YES  |     | NULL    |       |
+| custid    | varchar(15) | YES  |     | NULL    |       |
+| orderdate | date        | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.04 sec)
+
+mysql> desc product;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| prodid      | varchar(15) | NO   | PRI | NULL    |       |
+| productname | varchar(15) | YES  |     | NULL    |       |
+| ordrid      | varchar(15) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table product add foreign key(ordrid) references orders(orderid);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`employee`.`#sql-123c_8`, CONSTRAINT `product_ibfk_1` FOREIGN KEY (`ordrid`) REFERENCES `orders` (`orderid`))
+mysql> select * from orders;
++---------+-----------+----------+--------+------------+
+| orderid | ordername | custname | custid | orderdate  |
++---------+-----------+----------+--------+------------+
+| c1      | pen       | fidha    | CP1    | 2030-12-12 |
+| c2      | book      | hadiya   | CP2    | 2030-12-13 |
+| c3      | cake      | wafa     | CP3    | 2030-12-14 |
+| c4      | lipstick  | niba     | CP4    | 2030-12-15 |
+| c5      | chair     | nisha    | CP5    | 2030-12-16 |
++---------+-----------+----------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from product;
++--------+-------------+--------+
+| prodid | productname | ordrid |
++--------+-------------+--------+
+| b2     | book        | CP2    |
+| c3     | cake        | CP3    |
+| c4     | chair       | CP5    |
+| l4     | lipstick    | CP4    |
+| p1     | pen         | CP1    |
++--------+-------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> update product set ordrid="c1";
+Query OK, 5 rows affected (0.01 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> update product set ordrid="c2";
+Query OK, 5 rows affected (0.00 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> update product set ordrid="c3";
+Query OK, 5 rows affected (0.00 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> update product set ordrid="c4";
+Query OK, 5 rows affected (0.00 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> update product set ordrid="c5";
+Query OK, 5 rows affected (0.00 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select * from product;
++--------+-------------+--------+
+| prodid | productname | ordrid |
++--------+-------------+--------+
+| b2     | book        | c5     |
+| c3     | cake        | c5     |
+| c4     | chair       | c5     |
+| l4     | lipstick    | c5     |
+| p1     | pen         | c5     |
++--------+-------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> update product set ordrid="c1" where prodid="b2";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update product set ordrid="c2" where prodid="c3";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from product;
++--------+-------------+--------+
+| prodid | productname | ordrid |
++--------+-------------+--------+
+| b2     | book        | c1     |
+| c3     | cake        | c2     |
+| c4     | chair       | c5     |
+| l4     | lipstick    | c5     |
+| p1     | pen         | c5     |
++--------+-------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> update product set ordrid="c3" where prodid="c4";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update product set ordrid="c4" where prodid="l4";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update product set ordrid="c5" where prodid="p1";
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> select * from product;
++--------+-------------+--------+
+| prodid | productname | ordrid |
++--------+-------------+--------+
+| b2     | book        | c1     |
+| c3     | cake        | c2     |
+| c4     | chair       | c3     |
+| l4     | lipstick    | c4     |
+| p1     | pen         | c5     |
++--------+-------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> alter table product add foreign key(ordrid) references orders(orderid);
+Query OK, 5 rows affected (0.07 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> desc product;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| prodid      | varchar(15) | NO   | PRI | NULL    |       |
+| productname | varchar(15) | YES  |     | NULL    |       |
+| ordrid      | varchar(15) | YES  | MUL | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from product join orders on product.ordrid=orders.orderid;
++--------+-------------+--------+---------+-----------+----------+--------+------------+
+| prodid | productname | ordrid | orderid | ordername | custname | custid | orderdate  |
++--------+-------------+--------+---------+-----------+----------+--------+------------+
+| b2     | book        | c1     | c1      | pen       | fidha    | CP1    | 2030-12-12 |
+| c3     | cake        | c2     | c2      | book      | hadiya   | CP2    | 2030-12-13 |
+| c4     | chair       | c3     | c3      | cake      | wafa     | CP3    | 2030-12-14 |
+| l4     | lipstick    | c4     | c4      | lipstick  | niba     | CP4    | 2030-12-15 |
+| p1     | pen         | c5     | c5      | chair     | nisha    | CP5    | 2030-12-16 |
++--------+-------------+--------+---------+-----------+----------+--------+------------+
+5 rows in set (0.00 sec)
+
